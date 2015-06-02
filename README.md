@@ -7,12 +7,21 @@ Web-based telecommunications billing platform that automates and performs teleco
 1. Fill the database connection info for development, test and production in `config/databases.yml`
 2. Enter your Amazon S3 credentials in `config/initializers/carrierwave.rb` (A S3 account is required in order to store CDRs and generated Invoices)
 3. Enter your SMTP config parameters in `config/initializers/settings.rb` (A SMTP server is required in order to send invoices to clients via email)
+4. Run `bundle install` from the top folder in order to install the required gems.
+5. Run `rake db:migrate` from the top folder in order to generate the database scripts.
 
 ### Running Billycom Web locally
-1. Change directory to <tt>myapp</tt> and start the web server:
-       <tt>cd myapp; rails server</tt> (run with --help for options)
+1. Start the billing engine by running `script/delayed_job start`
+2. Start the web server: `rails server` (run with --help for options)
+3. Go to http://localhost:3000/
 
-2. Go to http://localhost:3000/
+### Create your first company account
+Billycom Web is a multi-tenant application, so you will first have to create your own company account in order to start using it.
+
+1. Go to http://localhost:3000/admin (default username is: 'admin' and the password is 'P@ssw0rd')
+2. Add a new company
+3. Add a new user and link it to the company that you just created
+4. Go to http://localhost:3000/ and use the credentials created in step 3.
 
 ### Description of Contents
 The directory structure:
