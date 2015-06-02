@@ -1,5 +1,7 @@
 # Billycom Web
-Web-based telecommunications billing platform that automates and performs telecom billing functions for telecom providers, interconnect companies, telephone lines and long distance resellers. This web-based telecom billing system allows you to import the call detail records (CDR) that you receive from your telecom providers and automatically generates the bills for your end clients, based on the rates you set up by using Billycom’s user interface. Then you can either print these invoices or send them directly to your end clients via email
+Web-based telecommunications billing platform that automates and performs telecom billing functions for telecom providers, interconnect companies, telephone lines and long distance resellers. This web-based telecom billing system allows you to import the call detail records (CDR) that you receive from your telecom providers and automatically generates the bills for your end clients, based on the rates you set up by using Billycom’s user interface. Then you can either print these invoices or send them directly to your end clients via email.
+
+![](https://shinyhelmets.files.wordpress.com/2010/06/picture-7.png)
 
 ### Setting up Billycom Web
 1. Fill the database connection info for development, test and production in `config/databases.yml`
