@@ -1,24 +1,20 @@
-== Billycom Web
+# Billycom Web
+Web-based telecommunications billing platform that automates and performs telecom billing functions for telecom providers, interconnect companies, telephone lines and long distance resellers. This web-based telecom billing system allows you to import the call detail records (CDR) that you receive from your telecom providers and automatically generates the bills for your end clients, based on the rates you set up by using Billycom’s user interface. Then you can either print these invoices or send them directly to your end clients via email
 
-Billycom Web is a web-based telecommunications billing platform that automates and performs telecom billing functions for telecom providers, interconnect companies, telephone lines and long distance resellers. This web-based telecom billing system allows you to import the call detail records (CDR) that you receive from your telecom providers and automatically generates the bills for your end clients, based on the rates you set up by using Billycom’s user interface. Then you can either print these invoices or send them directly to your end clients via email
-
-== Setting up Billycom Web
-
+### Setting up Billycom Web
 1. Fill the database connection info for development, test and production in `config/databases.yml`
 2. Enter your Amazon S3 credentials in `config/initializers/carrierwave.rb` (A S3 account is required in order to store CDRs and generated Invoices)
 3. Enter your SMTP config parameters in `config/initializers/settings.rb` (A SMTP server is required in order to send invoices to clients via email)
 
-== Running Billycom Web locally
-
+### Running Billycom Web locally
 1. Change directory to <tt>myapp</tt> and start the web server:
        <tt>cd myapp; rails server</tt> (run with --help for options)
 
 2. Go to http://localhost:3000/
 
-== Description of Contents
-
+### Description of Contents
 The default directory structure of a generated Ruby on Rails application:
-
+```
   |-- app
   |   |-- assets
   |       |-- images
@@ -55,71 +51,25 @@ The default directory structure of a generated Ruby on Rails application:
   `-- vendor
       |-- assets
           `-- stylesheets
-      `-- plugins
+      `-- plugins```
 
-app
-  Holds all the code that's specific to this particular application.
+* app: Holds all the code that's specific to this particular application.
+* app/assets: Contains subdirectories for images, stylesheets, and JavaScript files.
+* app/controllers: Holds controllers that should be named like weblogs_controller.rb for automated URL mapping. All controllers should descend from ApplicationController which itself descends from ActionController::Base.
+* app/models: Holds models that should be named like post.rb. Models descend from ActiveRecord::Base by default.
+* app/views: Holds the template files for the view that should be named like weblogs/index.html.erb for the WeblogsController#index action. All views use eRuby syntax by default.
+* app/views/layouts: Holds the template files for layouts to be used with views. This models the common header/footer method of wrapping views. In your views, define a layout using the <tt>layout :default</tt> and create a file named default.html.erb. Inside default.html.erb, call <% yield %> to render the view using this layout.
+* app/helpers: Holds view helpers that should be named like weblogs_helper.rb. These are generated for you automatically when using generators for controllers. Helpers can be used to wrap functionality for your views into methods.
+* config: Configuration files for the Rails environment, the routing map, the database, and other dependencies.
+* db: Contains the database schema in schema.rb. db/migrate contains all the sequence of Migrations for your schema.
+* doc: This directory is where your application documentation will be stored when generated using <tt>rake doc:app</tt>
+* lib: Application specific libraries. Basically, any kind of custom code that doesn't belong under controllers, models, or helpers. This directory is in the load path.
+* public: The directory available for the web server. Also contains the dispatchers and the default HTML files. This should be set as the DOCUMENT_ROOT of your web server.
+* script: Helper scripts for automation and generation.
+* test: Unit and functional tests along with fixtures. When using the rails generate command, template test files will be generated for you and placed in this directory.
+* vendor: External libraries that the application depends on. Also includes the plugins subdirectory. If the app has frozen rails, those gems also go here, under vendor/rails/. This directory is in the load path.
 
-app/assets
-  Contains subdirectories for images, stylesheets, and JavaScript files.
+### License
+MIT
 
-app/controllers
-  Holds controllers that should be named like weblogs_controller.rb for
-  automated URL mapping. All controllers should descend from
-  ApplicationController which itself descends from ActionController::Base.
-
-app/models
-  Holds models that should be named like post.rb. Models descend from
-  ActiveRecord::Base by default.
-
-app/views
-  Holds the template files for the view that should be named like
-  weblogs/index.html.erb for the WeblogsController#index action. All views use
-  eRuby syntax by default.
-
-app/views/layouts
-  Holds the template files for layouts to be used with views. This models the
-  common header/footer method of wrapping views. In your views, define a layout
-  using the <tt>layout :default</tt> and create a file named default.html.erb.
-  Inside default.html.erb, call <% yield %> to render the view using this
-  layout.
-
-app/helpers
-  Holds view helpers that should be named like weblogs_helper.rb. These are
-  generated for you automatically when using generators for controllers.
-  Helpers can be used to wrap functionality for your views into methods.
-
-config
-  Configuration files for the Rails environment, the routing map, the database,
-  and other dependencies.
-
-db
-  Contains the database schema in schema.rb. db/migrate contains all the
-  sequence of Migrations for your schema.
-
-doc
-  This directory is where your application documentation will be stored when
-  generated using <tt>rake doc:app</tt>
-
-lib
-  Application specific libraries. Basically, any kind of custom code that
-  doesn't belong under controllers, models, or helpers. This directory is in
-  the load path.
-
-public
-  The directory available for the web server. Also contains the dispatchers and the
-  default HTML files. This should be set as the DOCUMENT_ROOT of your web
-  server.
-
-script
-  Helper scripts for automation and generation.
-
-test
-  Unit and functional tests along with fixtures. When using the rails generate
-  command, template test files will be generated for you and placed in this
-  directory.
-
-vendor
-  External libraries that the application depends on. Also includes the plugins
-  subdirectory. If the app has frozen rails, those gems also go here, under
-  vendor/rails/. This directory is in the load path.
+**Free Software, Hell Yeah!**
