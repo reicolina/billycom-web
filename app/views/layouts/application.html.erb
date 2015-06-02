@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Billycom Web</title>
+  <%= yield(:scripts) %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="wrapper">
+	  <% if current_user %>
+		<div id="company_name">
+			<b><a><%= ActsAsTenant.current_tenant.name %></a></b></br>
+		</div></br>
+		<div id="user_nav">
+		    <%= link_to current_user.username, edit_user_path(:current) %> |
+		    <%= link_to "Logout", logout_path %>
+		</div>
+	  <% end %>
+		<div id="header">
+			<div id="logo">
+				<%= image_tag "billycomweb.png" %>
+			</div>
+			<% if current_user %>
+				<div id="search">
+					<%= form_tag accounts_path, :method => 'get' do %>
+						<p>
+							<%= text_field_tag :search_string, params[:search_string]%>
+							<%= submit_tag "Search", :name => nil %>
+						</p>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+		<!-- end #header -->
+		<% if current_user %>
+			<div id="menu">
+				<%= render_navigation(:level => 1, :expand_all => true) %>
+			</div>
+		<% end %>
+		<!-- end #menu -->
+		<div id="page">
+		<div id="page-bgtop">
+		<div id="page-bgbtm">
+			<div id="content">
+				<p style="color: green"><%= flash[:notice] %></p>
+
+				<%= yield %>
+			</div>
+			<!-- end #content -->
+			<div id="sidebar">
+				<ul>
+					<li>
+						<!--<h2>Options</h2>-->
+						<%= render_navigation(:level => 2, :expand_all => true) %>
+					</li>
+				</ul>
+			</div>
+			<!-- end #sidebar -->
+			<div style="clear: both;">&nbsp;</div>
+		</div>
+		</div>
+		</div>
+		<!-- end #page -->
+	</div>
+		<div id="footer">
+			<p>Copyright (c) 2010 easytelecombilling.com. All rights reserved. Design by <a href="http://www.easytelecombilling.com/">easytelecombilling.com</a>.</p>
+		</div>
+		<!-- end #footer -->
+</body>
+</html>

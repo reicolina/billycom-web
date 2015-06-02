@@ -1,0 +1,46 @@
+<%= page_title('New Billed Call', 'Cancel', bill_billed_calls_path) %>
+
+<%= form_for [@bill, @billed_call], :url=>{ :controller => :billed_calls, :action => :create, :page => params[:page] } do |f| %>
+  <%= error_messages(@billed_call) %>
+
+<%= hidden_field_tag :bill_id, params[:bill_id] %>
+  <p>
+    <%= f.label :orig_tn, 'Originating number' %>
+    <%= f.text_field :orig_tn %>
+  </p>
+  <p>
+    <%= f.label :date %>
+    <%= f.text_field :date %>
+  </p>
+  <p>
+    <%= f.label :time %>
+    <%= f.text_field :time %>
+  </p>
+  <p>
+    <%= f.label :duration_sec, 'Duration(sec)' %>
+    <%= f.text_field :duration_sec %>
+  </p>
+  <p>
+    <%= f.label :destination %>
+    <%= f.text_field :destination %>
+  </p>
+  <p>
+    <%= f.label :dest_prov_state, 'Destination Province/State' %>
+    <%= f.text_field :dest_prov_state %>
+  </p>
+  <p>
+    <%= f.label :term_tn, 'Terminating number' %>
+    <%= f.text_field :term_tn %>
+  </p>
+  <p>
+    <%= f.label :code, 'Account code' %>
+    <%= f.text_field :code %>
+  </p>
+  <p>
+    <%= f.label :amount_charged %>
+    <%= f.text_field :amount_charged %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

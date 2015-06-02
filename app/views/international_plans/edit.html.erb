@@ -1,0 +1,13 @@
+<%= page_title_multiple_links('Editing International Plan', 'Details', @international_plan, 'Cancel', international_plans_path) %>
+
+<%= form_for(@international_plan) do |f| %>
+  <%= error_messages(@international_plan) %>
+
+  <p>
+    <%= f.label :name %>:
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

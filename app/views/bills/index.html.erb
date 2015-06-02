@@ -1,0 +1,84 @@
+<%= page_title(@billing_session.name + " bills", 'Back', billing_session_path(@billing_session)) %>
+
+<%= pagination @bills %>
+<% if @bills.length > 0 %>
+<table>
+  <tr>
+    <th>Number</th>
+    <th>Client</th>
+  </tr>
+<% else %>
+	<table>
+		No bills have been generated.
+<% end %>
+
+<% @bills.each do |bill| %>
+  <tr>
+    <td><%=h bill.number %></td>
+    <td><%=h bill.account.title %></td>
+	<% if bill.pending_flag == true %>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>Re-generating bill. Please refresh this page in a few minutes.</td>
+	<% else %>
+		<% if not bill.csv.blank? %>
+			<% if not bill.pdf.blank? %>
+				<td>
+					<%= link_to image_tag("page_white_acrobat.png"), bill.pdf.url.to_s, :title => "Download PDF" -%>
+<!-- 					<%= form_for :bill, :url=>{:controller=>"bills", :action=>"get_invoice", :id => bill} do |f| -%>
+						<%= image_submit_tag("page_white_acrobat.png", :title => "Download PDF") -%>
+					<% end %> -->
+				</td>
+			<% else %>
+				<td></td>
+			<% end %>
+			<% if not bill.csv.blank? %>
+				<td>
+					<%= link_to image_tag("page_white_excel.png"), bill.csv.url.to_s, :title => "Download Long Distance Usage" -%>
+<!-- 					<%= form_for :bill, :url=>{:controller=>"bills", :action=>"export_csv", :id => bill} do |f| -%>
+						<%= image_submit_tag("page_white_excel.png", :title => "Download Long Distance Usage") -%>
+					<% end %> -->
+				</td>
+			<% else %>
+				<td></td>
+			<% end %>
+			<% if not bill.account.billing_email.nil? and not @site.from_email.nil? %>
+				<% if bill.account.billing_email.length > 0  and @site.from_email.length > 0 %>
+					<% if bill.pdf.length > Source::Application.config.email_attachment_max_size %>
+						<td><%= image_tag("email_error.png", :border => 0)%></td>					
+					<% else %>
+						<% if bill.emailed %>
+						<td>
+							<%= form_for :bill, :url=>{:controller=>"bills", :action=>"email_invoice", :id => bill} do |f| -%>
+								<%= image_submit_tag("email_go.png", :confirm => "Email bill to client AGAIN??" + "\nTo: " + bill.account.billing_email + "\nFrom: " + @site.from_email, :title => "Email") -%>
+							<% end %>
+						</td>						
+						<% else %>
+							<td>
+								<%= form_for :bill, :url=>{:controller=>"bills", :action=>"email_invoice", :id => bill} do |f| -%>
+									<%= image_submit_tag("email.png", :confirm => "Email bill to client?" + "\nTo: " + bill.account.billing_email + "\nFrom: " + @site.from_email, :title => "Email") -%>
+								<% end %>
+							</td>
+						<% end %>
+					<% end %>
+				<% else %>
+					<td></td>
+				<% end %>
+			<% else %>
+				<td></td>
+			<% end %>
+		<%else%>
+			<td><%= image_tag("lock.png", :border => 0)%></td>
+			<td></td>
+			<td></td>
+		<% end %>
+<!-- 		<td><%= link_to image_tag("page_white_edit.png", :border => 0), url_for([@billing_session, bill]) + get_params, :title => 'Edit' %></td>
+	    <td><%= link_to image_tag("cross.png", :border => 0), [@billing_session, bill], :confirm => 'Are you sure?', :method => :delete, :title => 'Delete' %></td> -->
+	<% end %>
+  </tr>
+<% end %>
+</table>
+<%= pagination @bills %>

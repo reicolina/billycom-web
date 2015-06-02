@@ -1,0 +1,7 @@
+<%= page_title('Companies', 'Add new company', new_site_path) %>
+<table>
+	<%= table_header(@sites, [ 'Name' ]) %>
+	<% @sites.each do |site| %>
+		<%= table_row([ site.name ], site, nil) %>
+	<% end %>
+</table>

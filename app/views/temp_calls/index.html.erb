@@ -1,0 +1,107 @@
+<h2>Stranded Calls</h2><br/><br/>
+<!-- 
+<% if @pending_billing_sessions > 0 %>
+	<p>There is a billing session in progress. Please wait until it is finished before uploading new data.</p>
+<% else %>
+	<%= form_for :dump, :url=> calls_fast_import_path, :html => { :multipart => true } do |f| -%>
+	 <table>
+	   <tr>
+		 <td>
+		 	<%= f.label 'Select a long distance provider:' %><br />
+			<%= collection_select(:provider, :id, Provider.all, :id, :name, {:prompt => false})	%>
+		 </td>
+	   </tr>
+	   <tr>
+		 <td>
+	      <label for="dump_file">
+	        Select a CDR file and click on "Submit"
+	      </label>
+	     </td>
+	   </tr>
+	   <tr>
+	     <td >
+	       <%= f.file_field :file -%>
+	     </td>
+	   </tr>
+	   <tr>
+		<td>
+			<% if flash[:warning] %>
+				<font color="red"><%= flash[:warning] %></font>
+			<% end %>
+		</td>
+	  </tr>	
+	   <tr>
+	     <td colspan='2'>
+	       <%= submit_tag 'Submit', :confirm => 'Are you ready to proceed?', :disable_with => "Please wait..." -%>
+	     </td>
+	   </tr>
+	 </table><br />
+	<% end %>-->
+	
+	<table>
+		<tr>
+			<td>
+				<%= form_for :form1, :url=> calls_delete_new_records_path, :html => { :multipart => true } do |f| -%>
+					<%= @new_usage_count %> usage records left from previous failed process <%= submit_tag 'Delete', :confirm => 'Are you sure that you want to delete all these records?', :disable_with => "Please wait..." -%>
+				<% end %>
+			</td>
+		</tr>
+	</table><br/> 
+	<table>
+		<tr>
+			<td><h4>The following are stranded records that will be automatically billed in the next billing session after the missing information is added to Billycom Web:</h4></td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td>
+				<%= form_for :form2, :url=> calls_download_not_added_number_list_csv_path, :html => { :multipart => true } do |f| -%>
+					<%= @stranded_usage_count_good %> records with line numbers not added to Billycom Web <%= submit_tag 'Download list of numbers' -%>
+				<% end %>
+			</td>
+			<td>
+				<%= form_for :form3, :url=> calls_delete_stranded_good_records_path, :html => { :multipart => true } do |f| -%>
+					<%= submit_tag 'Delete', :confirm => 'Are you sure that you want to delete all these records?', :disable_with => "Please wait..." -%>
+				<% end %>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td>
+				<%= form_for :form4, :url=> calls_download_not_added_call_type_list_csv_path, :html => { :multipart => true } do |f| -%>
+					<%= @stranded_usage_count_bad1 %> records with call types that don't exist in Billycom Web <%= submit_tag 'Download list of call types' -%>
+				<% end %>
+			</td>
+			<td>
+				<%= form_for :form5, :url=> calls_delete_stranded_bad_records1_path, :html => { :multipart => true } do |f| -%>
+					<%= submit_tag 'Delete', :confirm => 'Are you sure that you want to delete all these records?', :disable_with => "Please wait..." -%>
+				<% end %>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td>
+				<%= form_for :form6, :url=> calls_download_not_added_cc_call_type_list_csv_path, :html => { :multipart => true } do |f| -%>
+					<%= @stranded_usage_count_bad2 %> records with calling card call types that don't exist in Billycom Web <%= submit_tag 'Download list of CC call types' -%>
+				<% end %>
+			</td>
+			<td>
+				<%= form_for :form7, :url=> calls_delete_stranded_bad_records2_path, :html => { :multipart => true } do |f| -%>
+					<%= submit_tag 'Delete', :confirm => 'Are you sure that you want to delete all these records?', :disable_with => "Please wait..." -%>
+				<% end %>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td>
+				<%= form_for :form8, :url=> calls_delete_stranded_bad_records_path, :html => { :multipart => true } do |f| -%>
+					<%= @stranded_usage_count_bad %> records that were not billed due to unknown reasons <%= submit_tag 'Delete', :confirm => 'Are you sure that you want to delete all these records?', :disable_with => "Please wait..." -%>
+				<% end %>
+			</td>
+		</tr>
+	</table>
+	
+<!-- <% end %> -->

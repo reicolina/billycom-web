@@ -1,0 +1,102 @@
+<%= page_title('New Long Distance Provider', 'Cancel', providers_path) %>
+
+<%= form_for(@provider) do |f| %>
+  <%= error_messages(@provider) %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :has_header %>
+    <%= f.check_box :has_header %>
+  </p>
+  <h4>Call detail record (CDR) file mapping:<br />
+	Please match each field with the corresponding CDR column number.
+  </h4>
+  <p>
+    <%= f.label :orig_tn, "Originating Number" %>
+    <%= f.text_field :orig_tn %>
+  </p>
+  <p>
+    <%= f.label :date %>
+    <%= f.text_field :date %>
+  </p>
+  <p>
+    <%= f.label :date_contains_time, "Date field contains time" %>
+    <%= f.check_box :date_contains_time %> The time field will be ignored if this option is checked.
+  </p>
+  <p>
+    <%= f.label :time %>
+    <%= f.text_field :time %>
+  </p>
+  <p>
+    <%= f.label :duration_sec, "Duration in seconds" %>
+    <%= f.text_field :duration_sec %>
+    <%= f.label :convert_from_minutes %>
+    <%= f.check_box :convert_from_minutes %>
+  </p>
+  <p>
+    <%= f.label :destination %>
+    <%= f.text_field :destination %>
+  </p>
+  <p>
+    <%= f.label :destination1, "Destination alternative field" %>
+    <%= f.text_field :destination1 %> The system will use this field if the primary destination field is blank.
+  </p>
+  <p>
+    <%= f.label :destination_prov_state, "Destination province or state" %>
+    <%= f.text_field :destination_prov_state %>
+  </p>
+  <p>
+    <%= f.label :destination_prov_state1, "Destination province or state alternative field" %>
+    <%= f.text_field :destination_prov_state1 %> The system will use this field if the primary destination province or state field is blank.
+  </p>
+  <p>
+    <%= f.label :cc_ind, "Calling card indicator" %>
+    <%= f.text_field :cc_ind %>
+  </p>
+  <p>
+    <%= f.label :ovs_ind, "International call indicator 1" %>
+    <%= f.text_field :ovs_ind %>
+  </p>
+  <p>
+    <%= f.label :ovs_ind2, "International call indicator 2" %>
+    <%= f.text_field :ovs_ind2 %>
+  </p>
+  <p>
+    <%= f.label :default_call_type %>
+	<%= collection_select(:provider, :default_call_type, CallTypeInfo.find(:all, :order => :name), :abbreviation, :name, {:prompt => true}) %> This will be used if no International Call Indicators are present.
+  </p>
+  <p>
+    <%= f.label :term_tn, "Terminating number" %>
+    <%= f.text_field :term_tn %>
+  </p>
+  <p>
+    <%= f.label :term_tn1, "Terminating number alternative field" %>
+    <%= f.text_field :term_tn1 %> The system will use this field if the primary terminating number field is blank or not valid.
+  </p>
+  <p>
+    <%= f.label :code, "Account code" %>
+    <%= f.text_field :code %>
+  </p>
+  <p>
+    <%= f.label :provider_charge %>
+    <%= f.text_field :provider_charge %>
+  </p>
+  <p>
+    <%= f.label :prefixes, "Originating numbers that start with" %>
+    <%= f.text_field :prefixes %>
+    <%= f.label :call_type_abbreviation, "will be imported as " %>
+    <%= f.text_field :call_type_abbreviation %> (call type abbreviation)
+  </p>
+  <p>
+    <%= f.label :prefixes1, "Originating numbers that start with" %>
+    <%= f.text_field :prefixes1 %>
+    <%= f.label :call_type_abbreviation1, "will be imported as " %>
+    <%= f.text_field :call_type_abbreviation1 %> (call type abbreviation)
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

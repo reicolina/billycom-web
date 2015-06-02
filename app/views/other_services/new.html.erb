@@ -1,0 +1,26 @@
+<%= page_title('New Service for ' + @account.title, 'Cancel', account_other_services_path) %>
+
+<%= form_for [@account,@other_service], :url=>{ :controller => :other_services, :action => :create, :page => params[:page], :search_string => params[:search_string] } do |f| %>
+  <%= error_messages(@other_service) %>
+
+<%= hidden_field_tag :account_id, params[:account_id] %>
+  <p>
+    <%= f.label :type_of_service, 'Type' %>
+    <%= f.text_field :type_of_service %>
+  </p>
+  <p>
+    <%= f.label :use %>
+    <%= f.text_field :use %>
+  </p>
+  <p>
+    <%= f.label :rate %>
+    <%= f.text_field :rate %>
+  </p>
+  <p>
+    <%= f.label :port_date %>
+    <%= f.date_select :port_date %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

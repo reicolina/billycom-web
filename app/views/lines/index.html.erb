@@ -1,0 +1,7 @@
+<%= page_title_multiple_links('Lines for ' + @account.title, 'Add new line', new_account_line_path(@account), 'Back', account_path(@account)) %>
+<table>
+	<%= table_header(@account.lines, [ 'Number', 'Type', 'Use', 'Line Rate', 'Long Distance Plan', 'Port Date', 'Active' ]) %>
+	<% @account.lines.each do |line| %>
+		<%= table_row([ line.number, line.type_of_line, line.use, line.line_rate, line.rating_plan.name, line.port_date, line.active? ? 'Yes' : 'No' ], [@account,line], edit_account_line_path(@account, line)) %>
+	<% end %>
+</table>

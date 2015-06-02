@@ -1,0 +1,21 @@
+<%= page_title('New local rate', 'Cancel', local_plans_path) %>
+
+<%= form_for(@local_plan) do |f| %>
+  <%= error_messages(@local_plan) %>
+
+  <p>
+    <%= f.label :name %>:
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :rate %>:
+    <%= f.text_field :rate %>
+  </p>
+  <p>
+    <%= f.label :increment_in_seconds %>
+    <%= f.text_field :increment_in_seconds %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

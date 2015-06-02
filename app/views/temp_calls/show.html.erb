@@ -1,0 +1,53 @@
+<h2>Upload Long Distance Usage</h2><br />
+
+<p>Long distance usage has been successfully uploaded.</p>
+
+<%= form_for :delete_new, :url=>{:controller=>"temp_calls", :action=>"delete_new_records"}, :html => { :multipart => true } do |f| -%>
+	<%= @new_usage_count %> usage records to be billed <%= submit_tag 'Delete', :confirm => 'Are you sure that you want to delete all records?', :disable_with => "Please wait..." -%>
+<% end %>
+<br />
+
+<h4>Preview of last 10 CDR records uploaded to the database. Make sure that the mapping is correct.</h4>
+<font size="1">
+<% if @temp_calls.length > 0 %>
+	<table>
+	  <tr>
+	    <th>Billed #</th>
+		<th>Date</th>
+		<th>Time</th>
+		<th>Dur(sec)</th>
+	    <th>To/From #</th>
+		<th>Place</th>
+		<th>Prov/State</th>
+		<th>Charge</th>
+		<th>Code</th>
+		<th>Type</th>
+		<th>CC Type</th>
+	  </tr>
+<% else %>
+	<table>
+		<tr>
+		<td>No records have been created.</td>
+		</tr>
+<% end %>
+
+<% @temp_calls.each do |call| %>
+  <tr>
+    <td><%=h call.orig_tn %></td>
+	<td><%=h call.date %></td>
+	<td><%=h call.time %></td>
+	<td><%=h call.duration_sec %></td>
+	<td><%=h call.term_tn %></td>
+	<td><%=h call.destination %></td>
+	<td><%=h call.dest_prov_state %></td>
+	<td><%=h call.provider_charge %></td>
+	<td><%=h call.code %></td>
+	<td><%=h call.ovs_ind %></td>
+	<td><%=h call.cc_ind %></td>
+  </tr>
+<% end %>
+</table><br />
+</font>
+
+
+<%= link_to 'Upload another file', temp_calls_path, :class => "underlined" %>

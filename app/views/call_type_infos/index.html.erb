@@ -1,0 +1,7 @@
+<%= page_title('Call Types', 'Add new call type', new_call_type_info_path) %>
+<table>
+	<%= table_header(@call_type_infos, [ 'Name', 'Abbreviation', 'Calling Card' ]) %>
+	<% @call_type_infos.each do |call_type_info| %>
+		<%= table_row([ call_type_info.name, call_type_info.abbreviation, call_type_info.is_calling_card? ? 'Yes' : 'No' ], call_type_info, edit_call_type_info_path(call_type_info)) %>
+	<% end %>
+</table>

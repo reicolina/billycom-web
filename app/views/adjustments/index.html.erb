@@ -1,0 +1,7 @@
+<%= page_title_multiple_links('Adjustments for ' + @account.title, 'Add new adjustment', new_account_adjustment_path(@account), 'Back', account_path(@account)) %>
+<table>
+	<%= table_header(@account.adjustments, [ 'Description', 'Amount', 'Apply on' ]) %>
+	<% @account.adjustments.each do |adjustment| %>
+		<%= table_row([ adjustment.description, adjustment.amount, adjustment.apply_on ], [@account,adjustment], edit_account_adjustment_path(@account,adjustment)) %>
+	<% end %>
+</table>

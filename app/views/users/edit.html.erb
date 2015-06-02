@@ -1,0 +1,19 @@
+<%= page_title('Edit User', 'Cancel', root_path) %>
+
+<%= form_for @user do |f| %>
+	<%= error_messages(@user) %>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
+

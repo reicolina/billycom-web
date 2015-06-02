@@ -1,0 +1,7 @@
+<%= page_title('Users', 'Add new user', new_user_path) %>
+<table>
+	<%= table_header(@users, [ 'Username', 'Company', 'Admin' ]) %>
+	<% @users.each do |user| %>
+		<%= table_row([ user.username, user.site.name,  (user.admin? ? 'Yes' : 'No') ], user, nil) %>
+	<% end %>
+</table>

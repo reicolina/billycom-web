@@ -1,0 +1,7 @@
+<%= page_title_multiple_links('Services Billed for ' + @bill.account.title + " (" + @bill.billing_session.name + ")", 'Add a new service to the bill', new_bill_billed_service_path(@bill), 'Back', billing_session_bill_path(@bill.billing_session.id, @bill)) %>
+<table>
+	<%= table_header(@bill.billed_services, [ 'Type of service', 'Use', 'Amount charged' ]) %>
+	<% @bill.billed_services.each do |billed_service| %>
+		<%= table_row([ billed_service.type_of_service, billed_service.use, billed_service.amount_charged ], [@bill, billed_service], edit_bill_billed_service_path(@bill, billed_service)) %>
+	<% end %>
+</table>

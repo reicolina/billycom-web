@@ -1,0 +1,29 @@
+</br>
+<%= form_for(international_rate) do |f| %>
+  <%= error_messages(international_rate) %>
+
+  <%= f.hidden_field :international_plan_id %>
+  <p>
+    <%= f.label :code %>
+    <%= f.text_field :code %>
+  </p>
+  <p>
+    <%= f.label :destination %>
+    <%= f.text_field :destination %>
+  </p>
+  <p>
+    <%= f.label :rate %>
+    <%= f.text_field :rate %>
+  </p>
+  <p>
+    <%= f.label :call_type %>
+    <%= select(:international_rate, :call_type, options_for_select([[CallTypeInfo.get_call_type_name(CallTypeInfo::NON_OVERSEAS), CallTypeInfo::NON_OVERSEAS], [CallTypeInfo.get_call_type_name(CallTypeInfo::OVERSEAS), CallTypeInfo::OVERSEAS], [CallTypeInfo.get_call_type_name(CallTypeInfo::OVERSEAS_MOBILE), CallTypeInfo::OVERSEAS_MOBILE], [CallTypeInfo.get_call_type_name(CallTypeInfo::CARIBBEAN), CallTypeInfo::CARIBBEAN], [CallTypeInfo.get_call_type_name(CallTypeInfo::CARIBBEAN_MOBILE), CallTypeInfo::CARIBBEAN_MOBILE], [CallTypeInfo.get_call_type_name(CallTypeInfo::FIXED_RATE), CallTypeInfo::FIXED_RATE]])) %>
+  </p>
+  <p>
+    <%= f.label :increment_in_seconds %>
+    <%= f.text_field :increment_in_seconds %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

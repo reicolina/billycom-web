@@ -1,0 +1,34 @@
+<!-- TODO: make this view easier for the user to understand -->
+<%= page_title('Editing Call Type', 'Cancel', call_type_infos_path) %>
+
+<%= form_for(@call_type_info) do |f| %>
+  <%= error_messages(@call_type_info) %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :abbreviation %>
+    <%= f.text_field :abbreviation %>
+  </p>
+  <p>
+    <%= f.label :call_type %>
+    <%= select(:call_type_info, :call_type, options_for_select([[CallTypeInfo.get_call_type_name(CallTypeInfo::NON_OVERSEAS), CallTypeInfo::NON_OVERSEAS], [CallTypeInfo.get_call_type_name(CallTypeInfo::OVERSEAS), CallTypeInfo::OVERSEAS], [CallTypeInfo.get_call_type_name(CallTypeInfo::OVERSEAS_MOBILE), CallTypeInfo::OVERSEAS_MOBILE], [CallTypeInfo.get_call_type_name(CallTypeInfo::CARIBBEAN), CallTypeInfo::CARIBBEAN], [CallTypeInfo.get_call_type_name(CallTypeInfo::CARIBBEAN_MOBILE), CallTypeInfo::CARIBBEAN_MOBILE], [CallTypeInfo.get_call_type_name(CallTypeInfo::FIXED_RATE), CallTypeInfo::FIXED_RATE]],@call_type_info.call_type)) %>
+  </p>
+  <p>
+    <%= f.label :fixed_rate %>
+    <%= f.text_field :fixed_rate %>
+  </p>
+  <p>
+    <%= f.label :cdr_charge_factor, 'CDR charge factor' %>
+    <%= f.text_field :cdr_charge_factor %>
+  </p>
+  <p>
+    <%= f.label :is_calling_card %>
+    <%= f.check_box :is_calling_card %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

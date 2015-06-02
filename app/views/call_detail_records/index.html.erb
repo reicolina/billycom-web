@@ -1,0 +1,35 @@
+<%= page_title_no_links('CDR Upload') %>
+
+
+<%= direct_upload_form_for @uploader do |f| %>
+  <table>
+    <tr>
+      <td>
+        <label>
+          Select a CDR file and click on "Submit"
+        </label>
+       </td>
+    </tr>
+    <tr>
+       <td >
+         <%= f.file_field :cdr -%>
+       </td>
+    </tr>
+    <tr>
+       <td colspan='2'>
+         <%= submit_tag 'Submit', :confirm => 'Are you ready to proceed?', :disable_with => "Please wait..." -%>
+       </td>
+     </tr>
+  </table>
+<% end %>
+
+<br/>
+
+<%= page_title_no_links('Current Uploaded CDRs') %>
+
+<table>
+  <%= table_header(@call_detail_records, [ 'Name', 'Provider' ]) %>
+  <% @call_detail_records.each do |call_detail_record| %>
+      <%= table_row([ call_detail_record.name, call_detail_record.provider.name ], call_detail_record, nil) %>
+  <% end %>
+</table>

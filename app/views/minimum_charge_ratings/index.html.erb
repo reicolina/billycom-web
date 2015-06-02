@@ -1,0 +1,7 @@
+<%= page_title('Call Minimum Charges', 'Add minimum charge', new_minimum_charge_rating_path) %>
+<table>
+	<%= table_header(@minimum_charge_ratings, [ 'Name' ]) %>
+	<% @minimum_charge_ratings.each do |charge| %>
+		<%= table_row([ charge.name ], charge, edit_minimum_charge_rating_path(charge)) %>
+	<% end %>
+</table>

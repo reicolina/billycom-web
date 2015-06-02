@@ -1,0 +1,12 @@
+<%= page_title('New Sales Representative', 'Cancel', sales_reps_path) %>
+
+<%= form_for(@sales_rep) do |f| %>
+  <%= error_messages(@sales_rep) %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

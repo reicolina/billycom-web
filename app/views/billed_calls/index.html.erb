@@ -1,0 +1,9 @@
+<%= page_title_multiple_links_no_subpage_for_back('Calls Billed for ' + @bill.account.title + " (" + @bill.billing_session.name + ")", 'Add a new call to the bill', new_bill_billed_call_path(@bill), 'Back', billing_session_bill_path(@bill.billing_session.id, @bill)) %>
+<%= subpagination @billed_calls %>
+<table>
+	<%= table_header(@billed_calls, [ 'Orig #', 'Date', 'Time', 'Dur(sec)', 'Destination', 'Prov/State', 'Term #', 'Code', 'Charge' ]) %>
+	<% @billed_calls.each do |billed_call| %>
+		<%= table_row([ billed_call.orig_tn, billed_call.date, billed_call.time, billed_call.duration_sec, billed_call.destination , billed_call.dest_prov_state, billed_call.term_tn, billed_call.code, billed_call.amount_charged ], [@bill, billed_call], edit_bill_billed_call_path(@bill, billed_call)) %>
+	<% end %>
+</table>
+<%= subpagination @billed_calls %>

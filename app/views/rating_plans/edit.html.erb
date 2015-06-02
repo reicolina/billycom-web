@@ -1,0 +1,30 @@
+<!-- TODO: make the CDR Charge Factor less confusing. Perhaps disabling the other fields? -->
+<%= page_title('Editing Long Distance Plan', 'Cancel', rating_plans_path) %>
+
+<%= form_for(@rating_plan) do |f| %>
+  <%= error_messages(@rating_plan) %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+  	<%= f.label :local_plan_id %>
+	<%= collection_select(:rating_plan, :local_plan_id , LocalPlan.all, :id, :name, {:prompt => true})	%>
+  </p>
+  <p>
+  	<%= f.label :international_plan_id %>
+	<%= collection_select(:rating_plan, :international_plan_id , InternationalPlan.all, :id, :name, {:prompt => true})	%>
+  </p>
+  <p>
+  	<%= f.label :minimum_charge_rating_id %>
+	<%= collection_select(:rating_plan, :minimum_charge_rating_id , MinimumChargeRating.all, :id, :name, {:prompt => true})	%>
+  </p>
+  <p>
+    <%= f.label :cdr_charge_factor, 'CDR charge factor' %>
+    <%= f.text_field :cdr_charge_factor %> This value will overwrite any rating plan or call type setting
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

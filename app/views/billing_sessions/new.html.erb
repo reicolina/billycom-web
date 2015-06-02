@@ -1,0 +1,32 @@
+<%= page_title('New Billing Session', 'Cancel', billing_sessions_path) %>
+
+<%= form_for(@billing_session) do |f| %><br />
+  <%= error_messages(@billing_session) %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :billing_date %>
+    <%= f.date_select :billing_date %>
+  </p>
+  <p>
+    <%= f.label :due_date %>
+    <%= f.date_select :due_date %>
+  </p>
+  <p>
+    <%= f.label :call_detail_records %><br/>
+    <% for call_detail_record in CallDetailRecord.find(:all) %>
+      &nbsp;&nbsp;&nbsp;&nbsp;<input type = "checkbox" id= "<%=call_detail_record.id%>" name="call_detail_record_ids[]" value="<%=call_detail_record.id%>"><%=call_detail_record.name%><br/>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :start_number %>
+    <%= f.text_field :start_number %>
+  </p>
+  <%= hidden_field_tag :pending_flag, params[:pending_flag] %>
+  <p>
+    <%= f.submit 'Start' %>
+  </p>
+<% end %>

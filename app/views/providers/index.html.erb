@@ -1,0 +1,7 @@
+<%= page_title('Log Distance Providers', 'Add new provider', new_provider_path) %>
+<table>
+	<%= table_header(@providers, [ 'Name' ]) %>
+	<% @providers.each do |provider| %>
+		<%= table_row([ provider.name ], provider, edit_provider_path(provider)) %>
+	<% end %>
+</table>

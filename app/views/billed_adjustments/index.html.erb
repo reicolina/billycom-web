@@ -1,0 +1,7 @@
+<%= page_title_multiple_links('Adjustments Billed for ' + @bill.account.title + " (" + @bill.billing_session.name + ")", 'Add a new adjustment to the bill', new_bill_billed_adjustment_path(@bill), 'Back', billing_session_bill_path(@bill.billing_session.id, @bill)) %>
+<table>
+	<%= table_header(@bill.billed_adjustments, [ 'Description', 'Amount charged' ]) %>
+	<% @bill.billed_adjustments.each do |billed_adjustment| %>
+		<%= table_row([ billed_adjustment.description, billed_adjustment.amount_charged ], [@bill, billed_adjustment], edit_bill_billed_adjustment_path(@bill, billed_adjustment)) %>
+	<% end %>
+</table>

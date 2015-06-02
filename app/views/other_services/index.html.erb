@@ -1,0 +1,7 @@
+<%= page_title_multiple_links('Services for ' + @account.title, 'Add new service', new_account_other_service_path(@account), 'Back', account_path(@account)) %>
+<table>
+	<%= table_header(@account.other_services, [ 'Type', 'Use', 'Rate', 'Port date' ]) %>
+	<% @account.other_services.each do |service| %>
+		<%= table_row([ service.type_of_service, service.use, service.rate, service.port_date ], [@account,service], edit_account_other_service_path(@account,service)) %>
+	<% end %>
+</table>

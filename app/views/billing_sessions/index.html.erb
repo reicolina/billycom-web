@@ -1,0 +1,37 @@
+<script language="javascript" type="text/javascript">setTimeout("location.reload();",10000);</script>
+<%= page_title('Billing Sessions', 'Start a new billing session', new_billing_session_path) %>
+<table>
+	<%= table_header(@billing_sessions, [ 'Name', 'Billing date', 'Due date', 'Start number', 'Status' ]) %>
+	<% @billing_sessions.each do |billing_session| %>
+	  <tr>
+	    <td><%=h billing_session.name %></td>
+	    <td><%=h billing_session.billing_date %></td>
+	    <td><%=h billing_session.due_date %></td>
+	    <td><%=h billing_session.start_number %></td>
+		<% if billing_session.failed? %>
+			<td style="color:red">Failed</td>
+		<% elsif billing_session.pending_flag? && (not billing_session.processing_flag?) %>
+			<td style="color:orange">Queued</td>
+		<% elsif billing_session.processing_flag? %>
+			<td style="color:brown"><%= image_tag("wheel.gif", :border => 0)%> <%=h billing_session.status %></td>
+		<% else %>
+			<td style="color:green">Ready</td>
+		<% end %>
+		<% if (billing_session.pending_flag == false) && (billing_session.processing_flag == false) %>
+		    <% if not billing_session.failed? %>
+				<td><%= link_to(image_tag("page_white_magnify.png", :border => 0), url_for(billing_session) + get_params, :title => 'Details') %></td>
+				<td><%= link_to(image_tag("page_white_edit.png", :border => 0), url_for(edit_billing_session_path(billing_session)) + get_params, :title => 'Edit') %></td>
+				<% if (not billing_session.csv.nil?) && (billing_session.csv = '') %>
+					<td>
+						<%= link_to image_tag("page_white_excel.png"), billing_session.csv.url.to_s, :title => "Download Summary" -%>
+<!-- 						<%= form_for :billing_session, :url=>{:controller=>"billing_sessions", :action=>"export_csv", :id => billing_session} do |f| -%>
+							<%= image_submit_tag("page_white_excel.png", :title => "Download Summary") -%>
+						<% end %> -->
+					</td>
+				<% end %>
+			<% end %>
+			<td><%= link_to(image_tag("cross.png", :border => 0), billing_session, :confirm => 'Are you sure that you want to permanently delete this item?', :method => :delete, :title => 'Delete') %></td>
+		<% end %>
+	  </tr>
+	<% end %>
+</table>

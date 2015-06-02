@@ -1,0 +1,19 @@
+<%= page_title('Bill details', 'Back', billing_session_bills_path) %>
+<p>
+  <b>Invoice Number:</b>
+  <%=h @bill.number %><br />
+
+  <b>Client:</b>
+  <%=h @bill.account.title %><br />
+
+  <b>Billing session:</b>
+  <%=h @bill.billing_session.name %><br />
+</p>
+
+<p>
+	<%= link_to pluralize(@bill.billed_lines.size, 'line'), bill_billed_lines_path(@bill)  + get_params, :class => "underlined" %><br />
+	<%= link_to pluralize(@bill.billed_services.size, 'service'), bill_billed_services_path(@bill) + get_params, :class => "underlined" %><br />
+	<%= link_to pluralize(@bill.billed_calls.size, 'call'), bill_billed_calls_path(@bill) + get_params, :class => "underlined" %><br />
+	<%= link_to pluralize(@bill.billed_adjustments.size, 'adjustment'), bill_billed_adjustments_path(@bill) + get_params, :class => "underlined" %><br />
+	<%= link_to pluralize(@bill.billed_taxes.size, 'tax'), bill_billed_taxes_path(@bill) + get_params, :class => "underlined" %><br />
+</p>

@@ -1,0 +1,20 @@
+<%= form_for(@call_detail_record) do |f| %>
+  <%= error_messages(@call_detail_record) %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :key %>
+  </div>
+  <div class="field">
+    <%= f.label :provider_id %>
+    <%= collection_select(:call_detail_record, :provider_id , Provider.all, :id, :name, {:prompt => true})  %>
+  </div>
+  <div class="actions">
+    <p>
+      <%= f.submit 'Save' %>
+    </p>
+  </div>
+<% end %>

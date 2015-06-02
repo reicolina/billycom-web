@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @call_detail_record.name %>
+</p>
+
+<p>
+  <b>Storage path:</b>
+  <%= @call_detail_record.storage_path %>
+</p>
+
+<p>
+  <b>Provider:</b>
+  <%= @call_detail_record.provider_id %>
+</p>
+
+<p>
+  <b>Site:</b>
+  <%= @call_detail_record.site_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_call_detail_record_path(@call_detail_record) %> |
+<%= link_to 'Back', call_detail_records_path %>

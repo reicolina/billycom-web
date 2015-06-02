@@ -1,0 +1,7 @@
+<%= page_title('International Plans', 'Add new international plan', new_international_plan_path) %>
+<table>
+	<%= table_header(@international_plans, [ 'Name' ]) %>
+	<% @international_plans.each do |plan| %>
+		<%= table_row_with_details([ plan.name ], plan, edit_international_plan_path(plan), plan) %>
+	<% end %>
+</table>

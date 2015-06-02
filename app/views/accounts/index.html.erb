@@ -1,0 +1,21 @@
+<% if @accounts.length > 0 %>
+	<h2>Client Search Results</h2></br></br>
+	<%= pagination @accounts %>
+	<table>
+	  <tr>
+	    <th>Account number</th>
+	    <th>Title</th>
+		<th>Active</th>
+	  </tr>
+<% else %>
+	<table>
+	<tr>
+	</br><td>Use the search field on the right upper corner of the screen to search by name, line or account number.</td>
+	</tr>
+<% end %>
+
+<% @accounts.each do |account| %>
+	<%= table_row_with_details([ account.account_number, account.title, account.active? ? 'Yes' : 'No' ], account, edit_account_path(account), account) %>
+<% end %>
+</table>
+<%= pagination @accounts %>

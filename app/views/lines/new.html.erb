@@ -1,0 +1,38 @@
+<%= page_title('New Line for ' + @account.title, 'Cancel', account_lines_path) %>
+
+<%= form_for [@account, @line], :url=>{ :controller => :lines, :action => :create, :page => params[:page], :search_string => params[:search_string] } do |f| %>
+  <%= error_messages(@line) %>
+
+<%= hidden_field_tag :account_id, params[:account_id] %>
+  <p>
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+  </p>
+  <p>
+    <%= f.label :number %>
+    <%= f.text_field :number %>
+  </p>
+  <p>
+    <%= f.label :type_of_line, 'Type' %>
+    <%= f.text_field :type_of_line %>
+  </p>
+  <p>
+    <%= f.label :use %>
+    <%= f.text_field :use %>
+  </p>
+  <p>
+    <%= f.label :line_rate %>
+    <%= f.text_field :line_rate %>
+  </p>
+  <p>
+  	<%= f.label :rating_plan_id  %>
+	<%= collection_select(:line, :rating_plan_id , RatingPlan.all, :id, :name, {:prompt => true})	%>
+  </p>
+  <p>
+    <%= f.label :port_date %>
+    <%= f.date_select :port_date %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

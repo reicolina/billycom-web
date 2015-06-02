@@ -1,0 +1,17 @@
+<%= page_title('Editing Tax', 'Cancel', taxes_path) %>
+
+<%= form_for(@tax) do |f| %>
+  <%= error_messages(@tax) %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :rate, "Rate(%)" %>
+    <%= f.text_field :rate %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

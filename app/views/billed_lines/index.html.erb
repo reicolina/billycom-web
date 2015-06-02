@@ -1,0 +1,7 @@
+<%= page_title_multiple_links('Lines Billed for ' + @bill.account.title + " (" + @bill.billing_session.name + ")", 'Add a new line to the bill', new_bill_billed_line_path(@bill), 'Back', billing_session_bill_path(@bill.billing_session.id, @bill)) %>
+<table>
+	<%= table_header(@bill.billed_lines, [ 'Number', 'Type of line', 'Use', 'Amount charged' ]) %>
+	<% @bill.billed_lines.each do |billed_line| %>
+		<%= table_row([ billed_line.number, billed_line.type_of_line, billed_line.use, billed_line.amount_charged ], [@bill,billed_line], edit_bill_billed_line_path(@bill, billed_line)) %>
+	<% end %>
+</table>

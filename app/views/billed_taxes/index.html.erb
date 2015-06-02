@@ -1,0 +1,7 @@
+<%= page_title_multiple_links('Taxes Billed for ' + @bill.account.title + " (" + @bill.billing_session.name + ")", 'Add a new tax to the bill', new_bill_billed_tax_path(@bill), 'Back', billing_session_bill_path(@bill.billing_session.id, @bill)) %>
+<table>
+	<%= table_header(@bill.billed_taxes, [ 'Name', 'Rate' ]) %>
+	<% @bill.billed_taxes.each do |billed_tax| %>
+		<%= table_row([ billed_tax.name, billed_tax.rate ], [@bill, billed_tax], edit_bill_billed_tax_path(@bill, billed_tax)) %>
+	<% end %>
+</table>

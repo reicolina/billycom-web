@@ -1,0 +1,25 @@
+<%= page_title('Editing Call Minimum Charge', 'Cancel', minimum_charge_ratings_path) %>
+
+<%= form_for(@minimum_charge_rating) do |f| %>
+  <%= error_messages(@minimum_charge_rating) %>
+  
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :duration_sec, 'Duration(sec)' %>
+    <%= f.text_field :duration_sec %>
+  </p>
+  <p>
+    <%= f.label :percentage, 'Percentage(%)' %>
+    <%= f.text_field :percentage %>
+  </p>
+  <p>
+    <%= f.label :fixed_minimum_charge %>
+    <%= f.text_field :fixed_minimum_charge %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

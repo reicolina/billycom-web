@@ -1,0 +1,117 @@
+<%= page_title('Company Settings', 'Edit', edit_site_path(@site)) %>
+
+<h4><u>Company Details:</u></h4><br />
+
+  <b>Company Name:</b>
+  <%=h @site.name %><br />
+
+  <b>Address:</b>
+  <%=h @site.address %><br />
+
+  <b>City:</b>
+  <%=h @site.city %><br />
+
+  <b>Province or state:</b>
+  <%=h @site.province_or_state %><br />
+
+  <b>Postal or zip code:</b>
+  <%=h @site.postal_or_zip_code %><br />
+
+  <b>Country:</b>
+  <%=h @site.country %><br />
+
+<br /><h4><u>Bill Settings:</u></h4><br />
+
+  <b>Currency symbol:</b>
+  <%=h @site.currency_symbol %><br />
+
+  <b>Bill inquiries title:</b>
+  <%=h @site.bill_inquiries_title %><br />
+
+  <b>Bill inquiries line 1:</b>
+  <%=h @site.bill_inquiries_line_1 %><br />
+
+  <b>Bill inquiries line 2:</b>
+  <%=h @site.bill_inquiries_line_2 %><br />
+
+  <b>Bill inquiries line 3:</b>
+  <%=h @site.bill_inquiries_line_3 %><br />
+
+  <b>Invoice number text:</b>
+  <%=h @site.invoice_number_text %><br />
+
+  <b>Invoice date text:</b>
+  <%=h @site.invoice_date_text %><br />
+
+  <b>Show due date:</b>
+  <%=h @site.show_due_date? ? 'Yes' : 'No' %><br />
+
+  <b>Show amount due section:</b>
+  <%=h @site.show_amount_due_section? ? 'Yes' : 'No' %><br />
+
+  <b>Invoice slip title:</b>
+  <%=h @site.invoice_slip_title %><br />
+
+  <b>Slip notes line 1:</b>
+  <%=h @site.slip_notes_line_1 %><br />
+
+  <b>Slip notes line 2:</b>
+  <%=h @site.slip_notes_line_2 %><br />
+
+  <b>Slip notes line 3:</b>
+  <%=h @site.slip_notes_line_3 %><br />
+
+  <b>Slip notes line 4:</b>
+  <%=h @site.slip_notes_line_4 %><br />
+
+  <b>Number group by text:</b>
+  <%=h @site.number_group_by_text %><br />
+
+  <b>Billed number title:</b>
+  <%=h @site.billed_number_title %><br />
+
+  <b>To/from number title:</b>
+  <%=h @site.to_from_number_title %><br />
+
+  <b>To/from title:</b>
+  <%=h @site.to_from_title %><br />
+
+  <b>Duration title:</b>
+  <%=h @site.duration_title %><br />
+
+  <b>Charge title:</b>
+  <%=h @site.charge_title %><br />
+
+  <b>Amount of decimal places:</b>
+  <%=h @site.decimals %><br />
+
+<br /><h4><u>Email Settings:</u></h4><br />
+
+  <b>Email from:</b>
+  <%=h @site.from_email %><br />
+
+  <b>Email body text:</b>
+  <%=h @site.email_body_text %><br />
+
+  <br /><h4><u>Logo:</u></h4><br />
+  <% if not @site.logo.nil? %>
+	<%= image_tag("/sites/" + @site.id.to_s() + "/code_image/", :alt => "", :size => "170x95") %><br />
+	<%= form_for :site, :url=>{:controller=>"sites", :action=>"delete_logo1", :id => @site} do |f| -%>
+		<%= image_submit_tag("cross.png", :title => "Delete Logo") -%>
+	<% end %>
+	<br />
+  <% elsif %>
+	<p>-No logo-</p>
+  <% end %>
+
+  <b>Show logo on print:</b>
+  <%=h @site.show_logo_on_print? ? 'Yes' : 'No' %><br />
+<!-- 
+<% if @site.bills.count > 0 %>
+	<h4><u>Bill Preview:</u>
+		<%= form_for :site, :url=>{:controller=>"sites", :action=>"bill_preview", :id => @site} do |f| -%>
+			<%= image_submit_tag("page_white_magnify.png", :title => "Bill Preview") -%>
+		<% end %></h4>
+<% end %>
+	 -->
+</p>

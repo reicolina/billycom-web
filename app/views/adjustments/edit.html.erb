@@ -1,0 +1,21 @@
+<%= page_title('Editing Adjustment for ' + @account.title, 'Cancel', account_adjustments_path) %>
+
+<%= form_for [@account,@adjustment], :url=>{ :controller => :adjustments, :action => :update, :page => params[:page], :search_string => params[:search_string] } do |f| %>
+  <%= error_messages(@adjustment) %>
+
+  <p>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+  </p>
+  <p>
+    <%= f.label :apply_on %>
+    <%= f.date_select :apply_on %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

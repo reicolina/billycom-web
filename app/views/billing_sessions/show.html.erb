@@ -1,0 +1,36 @@
+<h2>Billing Session Details</h2>
+
+<% if @billing_session.pending_flag == false %>
+	<%= link_to 'Edit', edit_billing_session_path(@billing_session) + get_params, :class => "underlined" %> |
+<% end %>
+<%= link_to 'Back', billing_sessions_path + get_params, :class => "underlined" %>
+<br /><br />
+
+<p>
+  <b>Name:</b>
+  <%=h @billing_session.name %><br />
+
+  <b>Billing date:</b>
+  <%=h @billing_session.billing_date %><br />
+
+  <b>Due date:</b>
+  <%=h @billing_session.due_date %><br />
+
+  <b>Start number:</b>
+  <%=h @billing_session.start_number %><br />
+</p>
+
+<p>
+  <%= link_to "View " + pluralize(@billing_session.bills.size, 'bill'), billing_session_bills_path(@billing_session) + get_params, :class => "underlined" %><br />
+  <% if @email_count > 0 and not @site.from_email.nil? %>
+	<% if @site.from_email.length > 0 %>
+		<% if @billing_session.batch_email_status == BillingSession::EMAILS_IN_PROGRESS %>
+			Email batch in progress<br />
+		<% elsif @billing_session.batch_email_status == BillingSession::EMAILS_SENT %>
+			<%= link_to "Re-Send all bills", {:controller=>"billing_sessions", :action=>"batch_email", :id => @billing_session }, :confirm => "Are you sure you want to send ALL bills AGAIN??", :class => "underlined" %><br />
+		<% else %>
+			<%= link_to "Email all bills", {:controller=>"billing_sessions", :action=>"batch_email", :id => @billing_session }, :confirm => "Are you sure you want to email all bills?", :class => "underlined" %><br />
+		<% end %>
+  	<% end %>
+  <% end %>
+</p>

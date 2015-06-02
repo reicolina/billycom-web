@@ -1,0 +1,17 @@
+<%= page_title('Editing Billed Adjustment', 'Cancel', bill_billed_adjustments_path) %>
+
+<%= form_for [@bill, @billed_adjustment], :url=>{ :controller => :billed_adjustments, :action => :update, :page => params[:page] } do |f| %>
+  <%= error_messages(@billed_adjustment) %>
+
+  <p>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :amount_charged %>
+    <%= f.text_field :amount_charged %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

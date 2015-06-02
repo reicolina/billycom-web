@@ -1,0 +1,27 @@
+<%= page_title('New User', 'Cancel', users_path) %>
+
+<%= form_for @user do |f| %>
+	<%= error_messages(@user) %>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p>
+    <%= f.label :admin %>
+    <%= f.check_box :admin %>
+  </p>
+  <p>
+    <%= f.label :site_id, "Company" %>
+    <%= f.select :site_id, @companies.map{ |c| [c.name, c.id] } %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
+

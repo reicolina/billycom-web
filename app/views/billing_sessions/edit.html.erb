@@ -1,0 +1,13 @@
+<%= page_title('Editing Billing Session', 'Cancel', billing_sessions_path) %>
+
+<%= form_for(@billing_session) do |f| %><br />
+  <%= error_messages(@billing_session) %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

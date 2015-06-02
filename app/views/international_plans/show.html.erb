@@ -1,0 +1,40 @@
+<%= page_title_no_params('International Plan Details', 'Cancel', international_plans_path) %>
+<b>Name:</b>
+<%=h @international_plan.name %>
+</p>
+<% if current_user.admin? %>
+	<form name = 'frm1'>
+		<input type="checkbox" name="upload_form" onclick="showhidefield1()">Upload international long distance rates (Admin only)<br />
+	</form>
+	<div id='hideablearea1' style='display:none;'>
+		<%= form_for :dump, :url=>{:controller=>"international_plans", :action=>"import", :id=>@international_plan.id}, :html => { :multipart => true } do |f| -%>
+			 <table>
+			   <tr>
+				 <td>
+			      <label for="dump_file">
+			        Select a CSV file and click on "Submit"
+			      </label>
+			     </td>
+			   </tr>
+			   <tr>
+			     <td >
+			       <%= f.file_field :file -%>
+			     </td>
+			   </tr>
+			   <tr>
+			     <td colspan='2'>
+			       <%= submit_tag 'Submit', :confirm => 'Are you sure? Existing records will be deleted.' -%>
+			     </td>
+			   </tr>
+			 </table>
+		<% end -%></br>
+	</div>
+<% end %>
+<form name = 'frm2'>
+	<input type="checkbox" name="new_international_rate" onclick="showhidefield2()"> Add a new international long distance rate<br />
+</form>
+<div id='hideablearea2' style='display:none;'>
+	<%= render :partial=>"new_international_rate", :locals=>{:international_rate=>InternationalRate.new(:international_plan_id=>@international_plan.id)} %>
+</div>
+<br />
+<%= render :partial=>"international_rate_list", :locals=>{:international_rates=>@international_plan.international_rates}%>

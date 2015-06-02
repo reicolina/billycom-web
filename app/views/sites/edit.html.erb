@@ -1,0 +1,144 @@
+<%= page_title('Editing Company', 'Cancel', @site) %>
+
+<%= form_for(@site, :html=> {:multipart=>true}) do |f| %>
+	<%= error_messages(@site) %>
+	<h4><u>Company Details:</u></h4><br /><br />
+	  <p>
+	    <%= f.label :name, "Company name" %>
+	    <%= f.text_field :name %>
+	  </p>
+	  <p>
+	    <%= f.label :address %>
+	    <%= f.text_field :address %>
+	  </p>
+	  <p>
+	    <%= f.label :city %>
+	    <%= f.text_field :city %>
+	  </p>
+	  <p>
+	    <%= f.label :province_or_state %>
+	    <%= f.text_field :province_or_state %>
+	  </p>
+	  <p>
+	    <%= f.label :postal_or_zip_code %>
+	    <%= f.text_field :postal_or_zip_code %>
+	  </p>
+	  <p>
+	    <%= f.label :country %>
+	    <%= f.text_field :country %>
+	  </p>
+	<h4><u>Bill Settings:</u></h4><br /><br />
+	  <p>
+	    <%= f.label :currency_symbol %>
+	    <%= f.text_field :currency_symbol %>
+	  </p>
+	  <p>
+	    <%= f.label :bill_inquiries_title %>
+	    <%= f.text_field :bill_inquiries_title %>
+	  </p>
+	  <p>
+	    <%= f.label :bill_inquiries_line_1 %>
+	    <%= f.text_field :bill_inquiries_line_1 %>
+	  </p>
+	  <p>
+	    <%= f.label :bill_inquiries_line_2 %>
+	    <%= f.text_field :bill_inquiries_line_2 %>
+	  </p>
+	  <p>
+	    <%= f.label :bill_inquiries_line_3 %>
+	    <%= f.text_field :bill_inquiries_line_3 %>
+	  </p>
+	  <p>
+	    <%= f.label :invoice_number_text %>
+	    <%= f.text_field :invoice_number_text %>
+	  </p>
+	  <p>
+	    <%= f.label :invoice_date_text %>
+	    <%= f.text_field :invoice_date_text %>
+	  </p>
+	  <p>
+	    <%= f.label :show_due_date %>
+	    <%= f.check_box :show_due_date %>
+	  </p>
+	  <p>
+	    <%= f.label :show_amount_due_section %>
+	    <%= f.check_box :show_amount_due_section %>
+	  </p>
+	  <p>
+	    <%= f.label :invoice_slip_title %>
+	    <%= f.text_field :invoice_slip_title %>
+	  </p>
+	  <p>
+	    <%= f.label :slip_notes_line_1 %>
+	    <%= f.text_field :slip_notes_line_1 %>
+	  </p>
+	  <p>
+	    <%= f.label :slip_notes_line_2 %>
+	    <%= f.text_field :slip_notes_line_2 %>
+	  </p>
+	  <p>
+	    <%= f.label :slip_notes_line_3 %>
+	    <%= f.text_field :slip_notes_line_3 %>
+	  </p>
+	  <p>
+	    <%= f.label :slip_notes_line_4 %>
+	    <%= f.text_field :slip_notes_line_4 %>
+	  </p>
+	  <p>
+	    <%= f.label :number_group_by_text %>
+	    <%= f.text_field :number_group_by_text %>
+	  </p>
+	  <p>
+	    <%= f.label :billed_number_title %>
+	    <%= f.text_field :billed_number_title %>
+	  </p>
+	  <p>
+	    <%= f.label :to_from_number_title, "To/From number title" %>
+	    <%= f.text_field :to_from_number_title %>
+	  </p>
+	  <p>
+	    <%= f.label :to_from_title, "To/From title" %>
+	    <%= f.text_field :to_from_title %>
+	  </p>
+	  <p>
+	    <%= f.label :duration_title %>
+	    <%= f.text_field :duration_title %>
+	  </p>
+	  <p>
+	    <%= f.label :charge_title %>
+	    <%= f.text_field :charge_title %>
+	  </p>
+	  <p>
+	    <%= f.label :decimals, "Amount of decimal places" %>
+	    <%= f.text_field :decimals %>
+	  </p>
+	<h4><u>Email Settings:</u></h4><br /><br />
+	  <% if current_user.admin? %>
+		  <p>
+		    <%= f.label :email_from %>
+		    <%= f.text_field :from_email %>
+		  </p>
+	  <% else %>
+		  <p>
+		    <%= f.label :email_from %>
+		    <%= f.text_field :from_email, :disabled => true%> Please contact us if you want to change this email address.
+		  </p>
+	  <% end %>
+	  <p>
+	    <%= f.label :email_body_text %><br />
+	    <%= f.text_area :email_body_text %>
+	  </p>
+	  <p>
+	    <h4><u><%= f.label :logo_file, "Logo (Max size: 5KB. Use a 170x95 pixels logo for better results)" %></u></h4><br /><br />
+		<%= image_tag("/sites/" + @site.id.to_s() + "/code_image/", :alt => "", :size => "170x95") %><br />
+		<%= f.label :logo_file, "Change logo" %>
+	    <%= f.file_field :logo_file,:onchange =>"validateFiles(this);",:data => {:max_file_size => 5.kilobytes} %>
+	  </p>
+	  <p>
+	    <%= f.label :show_logo_on_print %>
+	    <%= f.check_box :show_logo_on_print %>
+	  </p>
+	  <p>
+	    <%= f.submit 'Update' %>
+	  </p>
+<% end %>

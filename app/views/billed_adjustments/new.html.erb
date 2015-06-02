@@ -1,0 +1,18 @@
+<%= page_title('New Billed Adjustment', 'Cancel', bill_billed_adjustments_path) %>
+
+<%= form_for [@bill, @billed_adjustment], :url=>{ :controller => :billed_adjustments, :action => :create, :page => params[:page] } do |f| %>
+  <%= error_messages(@billed_adjustment) %>
+
+<%= hidden_field_tag :bill_id, params[:bill_id] %>
+  <p>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :amount_charged %>
+    <%= f.text_field :amount_charged %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

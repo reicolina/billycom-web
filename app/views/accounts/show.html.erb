@@ -1,0 +1,54 @@
+<%= page_title_multiple_links('Client Details', 'Edit', edit_account_path(@account), 'Home', accounts_path) %>
+<p>
+  <b>Active:</b>
+  <%=h @account.active? ? 'Yes' : 'No' %><br />
+
+  <b>Account number:</b>
+  <%=h @account.account_number %><br />
+
+  <b>Title:</b>
+  <%=h @account.title %><br />
+
+  <b>Address:</b>
+  <%=h @account.address %><br />
+
+  <b>City:</b>
+  <%=h @account.city %><br />
+
+  <b>Province or state:</b>
+  <%=h @account.province_or_state %><br />
+
+  <b>Zip or postal code:</b>
+  <%=h @account.zip_or_postal_code %><br />
+
+  <b>Billing email:</b>
+  <%=h @account.billing_email %><br />
+
+  <b>Main contact name:</b>
+  <%=h @account.main_contact_name %><br />
+
+  <b>Main contact phone:</b>
+  <%=h @account.main_contact_phone %><br />
+
+  <b>Main contact fax:</b>
+  <%=h @account.main_contact_fax %><br />
+
+  <b>Main contact email:</b>
+  <%=h @account.main_contact_email %><br />
+
+  <b>Sales rep:</b>
+  <%=h @account.sales_rep.name %><br />
+
+  <b>Taxes:</b>
+  <% for tax in @account.taxes %>
+  	<%=tax.name%>
+  <% end %>
+	<br />
+</p>
+
+<p>
+	<%= link_to pluralize(@account.lines.size, 'line'), account_lines_path(@account) + get_params, :class => "underlined" %><br />
+	<%= link_to pluralize(@account.other_services.size, 'service'), account_other_services_path(@account) + get_params, :class => "underlined" %><br />
+	<%= link_to pluralize(@account.adjustments.size, 'adjustment'), account_adjustments_path(@account) + get_params, :class => "underlined" %>
+</p>
+

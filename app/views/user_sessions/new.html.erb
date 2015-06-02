@@ -1,0 +1,25 @@
+<h2>Login</h2><br />
+
+<%= form_for @user_session do |f| %>
+	<% if @user_session.errors.count > 0 %>
+		  <div id="errorExplanation">
+		    <p><%= pluralize(@user_session.errors.count, "error") %> prohibited you from signing in:</p>
+		    <ul>
+		    <% @user_session.errors.full_messages.each do |msg| %>
+		      <li><%= msg %></li>
+		    <% end %>
+		    </ul>
+		  </div>
+	<% end %>
+  <p>
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p><%= f.submit 'Sign in' %></p>
+<% end %>
+
+

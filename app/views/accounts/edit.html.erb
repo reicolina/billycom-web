@@ -1,0 +1,67 @@
+<%= page_title_multiple_links('Editing Client', 'Details', @account, 'Cancel', accounts_path) %>
+
+<%= form_for @account, :url=>{ :controller => :accounts, :action => :update, :page => params[:page], :search_string => params[:search_string] } do |f| %>
+  <%= error_messages(@account) %>
+
+  <p>
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+  </p>
+  <p>
+    <%= f.label :account_number %>
+    <%= f.text_field :account_number %>
+  </p>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </p>
+  <p>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :province_or_state %>
+    <%= f.text_field :province_or_state %>
+  </p>
+  <p>
+    <%= f.label :zip_or_postal_code %>
+    <%= f.text_field :zip_or_postal_code %>
+  </p>
+  <p>
+    <%= f.label :billing_email %>
+    <%= f.text_field :billing_email %>
+  </p>
+  <p>
+    <%= f.label :main_contact_name %>
+    <%= f.text_field :main_contact_name %>
+  </p>
+  <p>
+    <%= f.label :main_contact_phone %>
+    <%= f.text_field :main_contact_phone %>
+  </p>
+  <p>
+    <%= f.label :main_contact_fax %>
+    <%= f.text_field :main_contact_fax %>
+  </p>
+  <p>
+    <%= f.label :main_contact_email %>
+    <%= f.text_field :main_contact_email %>
+  </p>
+  <p>
+  	<%= f.label :sales_rep_id %>
+	<%= collection_select(:account, :sales_rep_id, SalesRep.all, :id, :name, {:prompt => true})	%>
+  </p>
+   <p>
+  	<%= f.label :taxes %>
+	<% for tax in Tax.find(:all) %>
+		<input type = "checkbox" id= "<%=tax.id%>" name="tax_ids[]" value="<%=tax.id%>" <%if @account.taxes.include? tax%>checked = "checked" <% end %> ><%=tax.name%>
+	<% end %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

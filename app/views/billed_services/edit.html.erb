@@ -1,0 +1,21 @@
+<%= page_title('Editing Billed Service', 'Cancel', bill_billed_services_path) %>
+
+<%= form_for [@bill, @billed_service], :url=>{ :controller => :billed_services, :action => :update, :page => params[:page] } do |f| %>
+  <%= error_messages(@billed_service) %>
+
+  <p>
+    <%= f.label :type_of_service %>
+    <%= f.text_field :type_of_service %>
+  </p>
+  <p>
+    <%= f.label :use %>
+    <%= f.text_field :use %>
+  </p>
+  <p>
+    <%= f.label :amount_charged %>
+    <%= f.text_field :amount_charged %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

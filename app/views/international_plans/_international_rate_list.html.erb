@@ -1,0 +1,8 @@
+<%= pagination @rates %>
+<table>
+	<%= table_header(@rates, [ 'Code', 'Destination', 'Rate', 'Call Type' ]) %>
+	<% @rates.each do |rate| %>
+		<%= table_row([ rate.code, rate.destination, rate.rate, CallTypeInfo.get_call_type_name(rate.call_type) ], rate, edit_international_rate_path(rate)) %>
+	<% end %>
+</table></br>
+<%= pagination @rates %>

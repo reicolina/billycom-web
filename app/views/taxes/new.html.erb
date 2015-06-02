@@ -1,0 +1,21 @@
+<%= page_title('New Tax', 'Cancel', taxes_path) %>
+
+<%= form_for(@tax) do |f| %>
+  <%= error_messages(@tax) %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :rate, "Rate(%)" %>
+    <%= f.text_field :rate %>
+  </p>
+  <p>
+    <%= label_tag :assign_to_all, "Assign to all clients" %>
+    <%= check_box_tag :assign_to_all %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

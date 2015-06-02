@@ -1,0 +1,17 @@
+<%= page_title('Editing Billed Tax', 'Cancel', bill_billed_taxes_path) %>
+
+<%= form_for [@bill, @billed_tax], :url=>{ :controller => :billed_taxes, :action => :update, :page => params[:page] } do |f| %>
+  <%= error_messages(@billed_tax) %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :rate %>
+    <%= f.text_field :rate %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

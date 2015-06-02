@@ -1,0 +1,7 @@
+<%= page_title('Sales Representatives', 'Add new sales representative', new_sales_rep_path) %>
+<table>
+	<%= table_header(@sales_reps, [ 'Name' ]) %>
+	<% @sales_reps.each do |sales_rep| %>
+		<%= table_row([ sales_rep.name ], sales_rep, edit_sales_rep_path(sales_rep)) %>
+	<% end %>
+</table>

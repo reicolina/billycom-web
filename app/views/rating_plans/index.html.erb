@@ -1,0 +1,7 @@
+<%= page_title('Long Distance Plans', 'Add new plan', new_rating_plan_path) %>
+<table>
+	<%= table_header(@rating_plans, [ 'Name', 'Local Plan', 'International Plan', 'Minimum Charge Rating', 'Factor' ]) %>
+	<% @rating_plans.each do |plan| %>
+		<%= table_row([ plan.name, plan.local_plan.name, plan.international_plan.name, plan.minimum_charge_rating.name, plan.cdr_charge_factor ], plan, edit_rating_plan_path(plan)) %>
+	<% end %>
+</table>

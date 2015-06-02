@@ -1,0 +1,8 @@
+<%= page_title('Local Rates', 'Add new local rate', new_local_plan_path) %>
+<table>
+	<%= table_header(@local_plans, [ 'Name', 'Rate', 'Increment(seconds)' ]) %>
+	<% @local_plans.each do |local_plan| %>
+		<%= table_row([ local_plan.name, local_plan.rate, local_plan.increment_in_seconds ], local_plan, edit_local_plan_path(local_plan)) %>
+	<% end %>
+</table>
+

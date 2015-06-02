@@ -1,0 +1,7 @@
+<%= page_title('Taxes', 'Add new tax', new_tax_path) %>
+<table>
+	<%= table_header(@taxes, [ 'Name', 'Rate' ]) %>
+	<% @taxes.each do |tax| %>
+		<%= table_row([ tax.name, number_to_percentage(tax.rate,:precision => 2) ], tax, edit_tax_path(tax)) %>
+	<% end %>
+</table>
