@@ -3,6 +3,12 @@ Web-based telecommunications billing platform that automates and performs teleco
 
 ![](https://shinyhelmets.files.wordpress.com/2010/06/picture-7.png)
 
+### Requisites
+* MySQL Database
+* Ruby 1.9.3-p374
+* Rails 3.2.11
+* An Amazon S3 account (Billycom Web is designed to store uploaded CDRs and generated bills in Amazon S3)
+
 ### Setting up Billycom Web
 1. Fill the database connection info for development, test and production in `config/databases.yml`
 2. Enter your Amazon S3 credentials in `config/initializers/carrierwave.rb` (A S3 account is required in order to store CDRs and generated Invoices)
