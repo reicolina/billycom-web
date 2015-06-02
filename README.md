@@ -71,8 +71,11 @@ The directory structure:
 * script: Helper scripts for automation and generation.
 * test: Unit and functional tests along with fixtures. When using the rails generate command, template test files will be generated for you and placed in this directory.
 * vendor: External libraries that the application depends on. Also includes the plugins subdirectory. If the app has frozen rails, those gems also go here, under vendor/rails/. This directory is in the load path.
+Support
 
 ### License
-MIT
+MIT (**Free Software, Hell Yeah!**)
 
-**Free Software, Hell Yeah!**
+### Support
+* To ask questions, report defects or make suggestions please go to: https://github.com/reinaldo13/billycom-web/issues
+* To enquire about consulting services including installation, training and customization please contact me at reinaldo13+github@gmail.com
