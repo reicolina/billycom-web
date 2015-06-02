@@ -13,7 +13,7 @@ Web-based telecommunications billing platform that automates and performs teleco
 2. Go to http://localhost:3000/
 
 ### Description of Contents
-The default directory structure of a generated Ruby on Rails application:
+The directory structure:
 ```
   |-- app
   |   |-- assets
@@ -51,7 +51,8 @@ The default directory structure of a generated Ruby on Rails application:
   `-- vendor
       |-- assets
           `-- stylesheets
-      `-- plugins```
+      `-- plugins
+```
 
 * app: Holds all the code that's specific to this particular application.
 * app/assets: Contains subdirectories for images, stylesheets, and JavaScript files.
