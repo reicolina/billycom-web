@@ -21,7 +21,7 @@ Web-based telecommunications billing platform that automates and performs teleco
 2. Start the web server: `rails server` (run with --help for options)
 3. Go to http://localhost:3000/
 
-### Create your first company account
+### Create your First Company Account
 See [Creating a Company Account](https://github.com/reinaldo13/billycom-web/wiki/Creating-a-Company-Account) document in our [documentation](https://github.com/reinaldo13/billycom-web/wiki/Billycom-Web-Documentation) Wiki.
 
 ### Using Billycom Web
