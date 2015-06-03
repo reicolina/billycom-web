@@ -22,12 +22,7 @@ Web-based telecommunications billing platform that automates and performs teleco
 3. Go to http://localhost:3000/
 
 ### Create your first company account
-Billycom Web is a multi-tenant application, so you will first have to create your own company account in order to start using it.
-
-1. Go to http://localhost:3000/admin (default username is: 'admin' and the password is 'P@ssw0rd')
-2. Add a new company
-3. Add a new user and link it to the company that you just created
-4. Go to http://localhost:3000/ and use the credentials created in step 3.
+See [Creating a Company Account](https://github.com/reinaldo13/billycom-web/wiki/Creating-a-Company-Account) document in our [documentation](https://github.com/reinaldo13/billycom-web/wiki/Billycom-Web-Documentation) Wiki.
 
 ### Using Billycom Web
 See our [documentation](https://github.com/reinaldo13/billycom-web/wiki/Billycom-Web-Documentation)
