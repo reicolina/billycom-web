@@ -29,6 +29,9 @@ Billycom Web is a multi-tenant application, so you will first have to create you
 3. Add a new user and link it to the company that you just created
 4. Go to http://localhost:3000/ and use the credentials created in step 3.
 
+### Using Billycom Web
+See our [documentation](https://github.com/reinaldo13/billycom-web/wiki/Billycom-Web-Documentation)
+
 ### Description of Contents
 The directory structure:
 ```
