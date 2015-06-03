@@ -89,7 +89,7 @@ The directory structure:
 Support
 
 ### License
-MIT (**Free Software, Hell Yeah!**)
+MIT License: You can do anything you want with this code **as long as you provide attribution back to me and don’t hold me liable**.
 
 ### Support
 * To ask questions, report defects or make suggestions please go to: https://github.com/reinaldo13/billycom-web/issues
