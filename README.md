@@ -17,8 +17,8 @@ Web-based telecommunications billing platform that automates and performs teleco
 5. Run `RAILS_ENV=[your_environment_name_here] rake db:migrate` from the top folder in order to run the database scripts.
 
 ### Running Billycom Web locally
-1. Start the billing engine by running `script/delayed_job start`
-2. Start the web server: `rails server` (run with --help for options)
+1. Start the billing engine by running `RAILS_ENV=[your_environment_name_here] script/delayed_job start`
+2. Start the web server: `RAILS_ENV=[your_environment_name_here] rails server` (run with --help for options)
 3. Go to http://localhost:3000/
 
 ### Create your First Company Account
