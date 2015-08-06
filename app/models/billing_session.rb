@@ -14,17 +14,17 @@ class BillingSession < ActiveRecord::Base
   validates_presence_of :due_date
   validates_presence_of :call_detail_records, :on => :create
   validates_presence_of :start_number
-  
+
   EMAILS_NOT_SENT = 0
   EMAILS_IN_PROGRESS = 1
   EMAILS_SENT = 2
-  
+
   def no_pending_sessions
     return if BillingSession.count(:conditions => ['pending_flag = true']) == 0
     errors[:base] << "Cannot start a billing session. Another session is in progress."
     false
   end
-  
+
   # def has_temp_calls
   #   return if TempCall.count(:conditions => ['rated = false']) > 0
   #   errors[:base] << "Cannot start a billing session. Call usage import process is not completed or hasn't started at all."
@@ -55,7 +55,7 @@ class BillingSession < ActiveRecord::Base
       end
       Rails.logger.info "BATCH_EMAIL: Setting batch email to completed"
       billing_session.batch_email_status = BillingSession::EMAILS_SENT
-      billing_session.save  
+      billing_session.save
     end
   end
   handle_asynchronously :batch_email_process, :queue => 'emailing'
@@ -144,11 +144,11 @@ class BillingSession < ActiveRecord::Base
               Rails.logger.info "BILLING_LOG: moving billed taxes"
               total_charges = BilledCall.sum(:amount_charged, :conditions => "bill_id = " + bill.id.to_s) + BilledLine.sum(:amount_charged, :conditions => "bill_id = " + bill.id.to_s) + BilledService.sum(:amount_charged, :conditions => "bill_id = " + bill.id.to_s) + BilledAdjustment.sum(:amount_charged, :conditions => "bill_id = " + bill.id.to_s)
               account.taxes.each do |tax|
-                Rails.logger.info "BILLING_LOG: saving total " + tax.name.to_s + " tax charges" 
+                Rails.logger.info "BILLING_LOG: saving total " + tax.name.to_s + " tax charges"
                 billed_tax = BilledTax.new
                 billed_tax.name = tax.name
                 billed_tax.rate = tax.rate
-                billed_tax.amount_charged = billed_tax.calculate_amount(total_charges)
+                billed_tax.amount_charged = ("%.#{ActsAsTenant.current_tenant.decimals}f" % billed_tax.calculate_amount(total_charges))
                 billed_tax.bill_id = bill.id
                 billed_tax.save
                 billed_tax = nil
@@ -173,7 +173,7 @@ class BillingSession < ActiveRecord::Base
           billing_session.status = "Generating summary"
           billing_session.save
           billing_session = BillingSession.find(billing_session.id) #Need to reload Billing Session, otherwise Carrierwave gem will fail!
-          generate_summary_report(billing_session) 
+          generate_summary_report(billing_session)
           # remove the bills detail records (don't need them any more)
           billing_session.status = "Removing temporary data"
           billing_session.save
@@ -211,7 +211,7 @@ class BillingSession < ActiveRecord::Base
       GC.start #force garbage collector
   end
   handle_asynchronously :do_billing, :queue => 'billing'
-    
+
 end
 
 def do_rating
@@ -276,11 +276,11 @@ def do_rating
       TempCall.import calls, :on_duplicate_key_update => [:account_id, :amount_charged, :call_type, :rated, :stranded]
       calls = []
       #GC.start
-    end  
+    end
   end
   if (not calls.nil?) && (calls.length > 0)
     Rails.logger.info "INFO: [do_rating] executing update for the rest of the items left"
-    TempCall.import calls, :on_duplicate_key_update => [:account_id, :amount_charged, :call_type, :rated, :stranded]  
+    TempCall.import calls, :on_duplicate_key_update => [:account_id, :amount_charged, :call_type, :rated, :stranded]
   end
   line = nil
   type_info = nil
@@ -364,7 +364,7 @@ def move_billed_calls(bill_id, account_id)
       ActiveRecord::Base.connection.execute(sql)
       calls = []
       # GC.start
-    end 
+    end
   end
   if (not calls.nil?) && (calls.length > 0)
     sql = "INSERT INTO billed_calls (orig_tn, date, time, duration_sec, destination, dest_prov_state, term_tn, code, amount_charged, provider_id, bill_id, call_type, site_id) VALUES #{calls.join(", ")}".force_encoding("UTF-8")
@@ -381,16 +381,16 @@ def generate_files(billing_session)
   end
   bill = nil
   billing_session = nil
-end 
+end
 
 def generate_summary_csv(billing_session)
   require 'csv'
   Rails.logger.info "BILLING_LOG: Generating billing summary..."
-  csv_string = CSV.generate do |csv| 
+  csv_string = CSV.generate do |csv|
     csv << ["invoice_number","client_number","client_name","calls_total_billed","lines_total_billed","services_total_billed","adjustments_total_billed","taxes_total_billed"]
-    BillingSession.connection.select_rows("SELECT a.number as bill_number, 
-    	accounts.account_number as client_number, 
-    	accounts.title as client_name, 
+    BillingSession.connection.select_rows("SELECT a.number as bill_number,
+    	accounts.account_number as client_number,
+    	accounts.title as client_name,
     	(select ifnull(sum(amount_charged),0) from billed_calls where bill_id = a.id) as calls_total_billed,
     	(select ifnull(sum(amount_charged),0) from billed_lines where bill_id = a.id) as lines_total_billed,
     	(select ifnull(sum(amount_charged),0) from billed_services where bill_id = a.id) as services_total_billed,
