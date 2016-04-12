@@ -217,6 +217,10 @@ end
 def do_rating
   require 'activerecord-import'
   Rails.logger.info "BILLING_LOG: Rating calls for: " +  ActsAsTenant.current_tenant.name.to_s + "(" + ActsAsTenant.current_tenant.id.to_s + ")"
+  isCustomFlowIig = ActsAsTenant.current_tenant.name.include? 'Internet Information Group'
+  if isCustomFlowIig
+    Rails.logger.info "CUSTOM_FLOW: Running custom flow (do_rating) for IIG"
+  end
   n=0
   calls = []
   TempCall.find_each do |call|
@@ -234,10 +238,23 @@ def do_rating
               call.amount_charged = nil
             else #Now let's get to the fun stuff...do the rating!
               call.call_type = type_info.name #first set the call type name
-              call.amount_charged = do_rating_from_call_type_info(type_info,call,line)
+              if isCustomFlowIig
+                if call.term_tn.start_with? "13"
+                  call.amount_charged = 0.2727
+                elsif (call.term_tn.start_with? "614") &&  (call.duration_sec <= 30)
+                  call.amount_charged = 0.118
+                else
+                  call.amount_charged = do_rating_from_call_type_info(type_info,call,line)
+                end
+                Rails.logger.info "CUSTOM_FLOW: custom amount charged: " + call.amount_charged.to_s
+              else
+                call.amount_charged = do_rating_from_call_type_info(type_info,call,line)
+              end
               #Apply the fixed minimum charge
-              if call.amount_charged < line.rating_plan.minimum_charge_rating.fixed_minimum_charge
-                  call.amount_charged = line.rating_plan.minimum_charge_rating.fixed_minimum_charge
+              if not (call.amount_charged.nil?)
+                if call.amount_charged < line.rating_plan.minimum_charge_rating.fixed_minimum_charge
+                    call.amount_charged = line.rating_plan.minimum_charge_rating.fixed_minimum_charge
+                end
               end
             end
             #Mark as rated
