@@ -242,7 +242,11 @@ def do_rating
                 if call.term_tn.start_with? "13"
                   call.amount_charged = 0.2727
                 elsif (call.term_tn.start_with? "614") &&  (call.duration_sec <= 30)
+                  # the 614 numbers are Mobile and are 26c per minute but have a minimum "flagfall" of 11.8c
                   call.amount_charged = 0.118
+                elsif call.term_tn.start_with?("612", "613", "617", "618")
+                  # Australian Fixed - they should be billed at 10.909c
+                  call.amount_charged = 0.1091
                 else
                   call.amount_charged = do_rating_from_call_type_info(type_info,call,line)
                 end
