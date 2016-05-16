@@ -247,6 +247,12 @@ def do_rating
                 elsif call.term_tn.start_with?("612", "613", "617", "618")
                   # Australian Fixed - they should be billed at 10.909c
                   call.amount_charged = 0.1091
+                elsif (call.term_tn.start_with? "4") && call.call_type = "To Mobile" &&  (call.duration_sec <= 30)
+                  # NBN Mobile have a minimum "flagfall" of 11.8c
+                  call.amount_charged = 0.12
+                elsif call.term_tn.start_with?("2", "3", "7", "8") && call.call_type = "National" &&  (call.duration_sec <= 30)
+                  # NBN Australian calls (NBN) have a minimum "flagfall" of 12c
+                  call.amount_charged = 0.12
                 else
                   call.amount_charged = do_rating_from_call_type_info(type_info,call,line)
                 end
