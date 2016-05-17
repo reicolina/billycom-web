@@ -247,16 +247,21 @@ def do_rating
                 elsif call.term_tn.start_with?("612", "613", "617", "618")
                   # Australian Fixed - they should be billed at 10.909c
                   call.amount_charged = 0.1091
-                elsif (call.term_tn.start_with? "4") && call.call_type = "To Mobile" &&  (call.duration_sec <= 30)
-                  # NBN Mobile have a minimum "flagfall" of 11.8c
-                  call.amount_charged = 0.12
-                elsif call.term_tn.start_with?("2", "3", "7", "8") && call.call_type = "National" &&  (call.duration_sec <= 30)
-                  # NBN Australian calls (NBN) have a minimum "flagfall" of 12c
+                elsif (call.term_tn.start_with? "4") && call.call_type = "To Mobile"
+                  if call.duration_sec <= 88.8
+                    # NBN Mobile have a minimum "flagfall" of 13c
+                    call.amount_charged = 0.13
+                  else
+                    # regular NBN mobile per minute rate
+                    call.amount_charged = (call.duration_sec * 0.0876)/60
+                  end
+                elsif call.term_tn.start_with?("2", "3", "7", "8") && call.call_type = "National" &&  (call.duration_sec <= 216)
+                  # NBN Australian fixed calls (NBN) have a minimum "flagfall" of 12
                   call.amount_charged = 0.12
                 else
                   call.amount_charged = do_rating_from_call_type_info(type_info,call,line)
                 end
-                Rails.logger.info "CUSTOM_FLOW: custom amount charged: " + call.amount_charged.to_s
+                Rails.logger.info "CUSTOM_FLOW RATING: custom amount charged for dest (" + call.term_tn.to_s + "): " + call.amount_charged.to_s
               else
                 call.amount_charged = do_rating_from_call_type_info(type_info,call,line)
               end
@@ -346,6 +351,7 @@ end
 
 def get_overseas_rating(call,line,call_type)
   international_rate = line.rating_plan.international_plan.international_rates.find_by_number(call.term_tn,call_type)
+  Rails.logger.info "OVERSEAS RATING: destination --> " + call.term_tn.to_s + " Rating --> " + international_rate.destination.to_s
   get_charge(international_rate.rate,call,line,international_rate.increment_in_seconds)
 end
 

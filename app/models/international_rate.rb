@@ -12,12 +12,12 @@ class InternationalRate < ActiveRecord::Base
   validates_presence_of :increment_in_seconds
   validates_numericality_of :increment_in_seconds, :greater_than =>0
   paginates_per Source::Application.config.items_per_page
-  
+
   class << self
-    
+
     def delete_all()
       @rates = self.all
-      self.destroy(@rates)    
+      self.destroy(@rates)
     end
 
     def import_rates(parsed_file,id)
@@ -37,7 +37,7 @@ class InternationalRate < ActiveRecord::Base
             end
         end
       end
-      n  
+      n
     end
 
     def find_by_number(number, call_type)
@@ -47,10 +47,10 @@ class InternationalRate < ActiveRecord::Base
           sql = 'not in'
         end
         # Tested. This is multi-tenant friendly
-        find :first, :select => 'rate, increment_in_seconds', :conditions => ['code in (substring(? from 1 for 1),substring(? from 1 for 2),substring(? from 1 for 3),substring(? from 1 for 4),substring(? from 1 for 5),substring(? from 1 for 6),substring(? from 1 for 7)) and call_type ' + sql +  ' (' + CallTypeInfo::CARIBBEAN.to_s + ',' + CallTypeInfo::CARIBBEAN_MOBILE.to_s + ')', number, number, number, number, number, number, number], :order => "length(code) DESC", :limit => 1
+        find :first, :select => 'destination, rate, increment_in_seconds', :conditions => ['code in (substring(? from 1 for 1),substring(? from 1 for 2),substring(? from 1 for 3),substring(? from 1 for 4),substring(? from 1 for 5),substring(? from 1 for 6),substring(? from 1 for 7)) and call_type ' + sql +  ' (' + CallTypeInfo::CARIBBEAN.to_s + ',' + CallTypeInfo::CARIBBEAN_MOBILE.to_s + ')', number, number, number, number, number, number, number], :order => "length(code) DESC", :limit => 1
     end
 
   end
-  
+
 
 end
