@@ -247,7 +247,7 @@ def do_rating
                 elsif call.term_tn.start_with?("612", "613", "617", "618")
                   # Australian Fixed - they should be billed at 10.909c
                   call.amount_charged = 0.1091
-                elsif (call.term_tn.start_with? "4") && call.call_type = "To Mobile"
+                elsif (call.term_tn.start_with? "4") && (call.call_type == "To Mobile")
                   if call.duration_sec <= 88.8
                     # NBN Mobile have a minimum "flagfall" of 13c
                     call.amount_charged = 0.13
@@ -255,7 +255,7 @@ def do_rating
                     # regular NBN mobile per minute rate
                     call.amount_charged = (call.duration_sec * 0.0876)/60
                   end
-                elsif call.term_tn.start_with?("2", "3", "7", "8") && call.call_type = "National" &&  (call.duration_sec <= 216)
+                elsif call.term_tn.start_with?("2", "3", "7", "8") && (call.call_type == "National") &&  (call.duration_sec <= 216)
                   # NBN Australian fixed calls (NBN) have a minimum "flagfall" of 12
                   call.amount_charged = 0.12
                 else
@@ -323,9 +323,7 @@ def do_rating_from_call_type_info(type_info,call,line)
   if not line.rating_plan.cdr_charge_factor.nil? #individual markup?
     call.provider_charge * line.rating_plan.cdr_charge_factor
   elsif  not type_info.fixed_rate.nil? #fixed rate?
-    if type_info.fixed_rate > 0 #TODO: we can probably ommit this 'if' to allow '0'
       type_info.fixed_rate
-    end
   elsif not type_info.cdr_charge_factor.nil? #use charge from cdr?
     if  type_info.cdr_charge_factor > 0 #TODO: we can probably ommit this 'if' to allow '0'
       call.provider_charge * type_info.cdr_charge_factor
