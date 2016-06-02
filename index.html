@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Billycom Web by reinaldo13</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Billycom Web</h1>
+      <h2 class="project-tagline">Your Free Telecommunications Billing Platform!</h2>
+      <a href="https://github.com/reinaldo13/billycom-web" class="btn">View on GitHub</a>
+      <a href="https://github.com/reinaldo13/billycom-web/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/reinaldo13/billycom-web/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="billycom-web" class="anchor" href="#billycom-web" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Billycom Web</h1>
+
+<p>Web-based telecommunications billing platform that automates and performs telecom billing functions for telecom providers, interconnect companies, telephone lines and long distance resellers. This web-based telecom billing system allows you to import the call detail records (CDR) that you receive from your telecom providers and automatically generates the bills for your end clients, based on the rates you set up by using Billycom’s user interface. Then you can either print these invoices or send them directly to your end clients via email.</p>
+
+<h3>
+<a id="to-enquire-about-consulting-services-including-installation-training-and-customization-please-send-an-email-to-reinaldo13githubgmailcom" class="anchor" href="#to-enquire-about-consulting-services-including-installation-training-and-customization-please-send-an-email-to-reinaldo13githubgmailcom" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>To enquire about consulting services including installation, training and customization please send an email to <a href="mailto:reinaldo13+github@gmail.com">reinaldo13+github@gmail.com</a>
+</h3>
+
+<p><img src="https://shinyhelmets.files.wordpress.com/2010/06/picture-7.png" alt=""></p>
+
+<h3>
+<a id="requisites" class="anchor" href="#requisites" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requisites</h3>
+
+<ul>
+<li>MySQL Database</li>
+<li>Ruby 1.9.3-p374</li>
+<li>Rails 3.2.11</li>
+<li>An Amazon S3 account (Billycom Web is designed to store uploaded CDRs and generated bills in Amazon S3)</li>
+</ul>
+
+<h3>
+<a id="setting-up-billycom-web" class="anchor" href="#setting-up-billycom-web" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up Billycom Web</h3>
+
+<ol>
+<li>Fill the database connection info for development, test and production in <code>config/databases.yml</code>
+</li>
+<li>Enter your Amazon S3 credentials in <code>config/initializers/carrierwave.rb</code> (A S3 account is required in order to store CDRs and generated Invoices)</li>
+<li>Enter your SMTP config parameters in <code>config/initializers/settings.rb</code> (A SMTP server is required in order to send invoices to clients via email)</li>
+<li>Run <code>bundle install</code> from the top folder in order to install the required gems.</li>
+<li>Run <code>RAILS_ENV=[your_environment_name_here] rake db:migrate</code> from the top folder in order to run the database scripts.</li>
+</ol>
+
+<h3>
+<a id="running-billycom-web-locally" class="anchor" href="#running-billycom-web-locally" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Running Billycom Web locally</h3>
+
+<ol>
+<li>Start the billing engine by running <code>RAILS_ENV=[your_environment_name_here] script/delayed_job start</code>
+</li>
+<li>Start the web server: <code>RAILS_ENV=[your_environment_name_here] rails server</code> (run with --help for options)</li>
+<li>Go to http://localhost:3000/</li>
+</ol>
+
+<h3>
+<a id="create-your-first-company-account" class="anchor" href="#create-your-first-company-account" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create your First Company Account</h3>
+
+<p>See <a href="https://github.com/reinaldo13/billycom-web/wiki/Creating-a-Company-Account">Creating a Company Account</a> document in our <a href="https://github.com/reinaldo13/billycom-web/wiki/Billycom-Web-Documentation">documentation</a> Wiki.</p>
+
+<h3>
+<a id="using-billycom-web" class="anchor" href="#using-billycom-web" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using Billycom Web</h3>
+
+<p>See our <a href="https://github.com/reinaldo13/billycom-web/wiki/Billycom-Web-Documentation">documentation</a></p>
+
+<h3>
+<a id="project-structure" class="anchor" href="#project-structure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Project Structure</h3>
+
+<p>See the <a href="https://github.com/reinaldo13/billycom-web#description-of-contents">directory structore</a> section.</p>
+
+<h3>
+<a id="support" class="anchor" href="#support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support</h3>
+
+<ul>
+<li>To ask questions, report defects or make suggestions please go to: <a href="https://github.com/reinaldo13/billycom-web/issues">https://github.com/reinaldo13/billycom-web/issues</a>
+</li>
+<li>To enquire about consulting services including installation, training and customization please send an email to <a href="mailto:reinaldo13+github@gmail.com">reinaldo13+github@gmail.com</a>
+</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/reinaldo13/billycom-web">Billycom Web</a> is maintained by <a href="https://github.com/reinaldo13">reinaldo13</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
